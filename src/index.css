@@ -74,6 +74,7 @@ ul li a:hover {
 
 .home {
   display: flex;
+  flex-direction: column;
 }
 
 .heading {
@@ -93,7 +94,58 @@ ul li a:hover {
   border-radius: 32px;
 }
 
+.dropdown {
+  width: 300px;
+  margin: 40px;
+  position: relative;
+  border: 2px solid red;
+}
+
+.dropdown-btn {
+  padding: 10px 20px;
+  background: #fff;
+  box-shadow: 3px 3px 10px 6px rgba(0, 0, 0, 0.06);
+  font-weight: bold;
+  color: #333;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dropdown-btn img {
+  height: 15px;
+  width: 15px;
+}
+
+.dropdown-content {
+  position: absolute;
+  top: 110%;
+  padding: 15px;
+  background: #fff;
+  box-shadow: 3px 3px 10px 6px rgba(0, 0, 0, 0.06);
+  font-weight: 500;
+  color: #333;
+}
+
+.form-check {
+  display: flex;
+  align-items: center;
+}
+
+.check-input {
+  margin-right: 10px;
+}
+
 /* login & register */
+
+.login-main,
+.register-main {
+  display: flex;
+  height: 89vh;
+  justify-content: center;
+  align-items: center;
+}
+
 .register,
 .login {
   display: flex;
@@ -101,16 +153,10 @@ ul li a:hover {
   align-items: center;
   width: 54vw;
   height: 400px;
-  margin: auto;
-  margin-top: 60px;
   background-color: rgb(240, 243, 243);
   border-radius: 16px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
-
-/* .login {
-  margin-top: 125px;
-} */
 
 .register-container {
   display: flex;
