@@ -94,10 +94,19 @@ ul li a:hover {
   border-radius: 32px;
 }
 
+.filters {
+  display: flex;
+}
+
 .dropdown {
-  width: 300px;
+  width: 200px;
   margin: 40px;
   position: relative;
+}
+
+.status {
+  width: 150px;
+  user-select: none;
 }
 
 .dropdown-btn {
@@ -118,24 +127,27 @@ ul li a:hover {
   height: 13px;
   width: 16px;
   margin-right: 10px;
-  /* border: 1px solid red; */
 }
 
 .arrowup {
   height: 20px;
   width: 35px;
-  /* border: 1px solid blue; */
 }
 
 .dropdown-content {
   position: absolute;
   top: 110%;
+  left: 0;
   padding: 15px;
   background: #fff;
   box-shadow: 3px 3px 10px 6px rgba(0, 0, 0, 0.06);
   font-weight: 500;
   font-size: 17px;
   color: #333;
+}
+
+.status-content {
+  width: 119px;
 }
 
 .form-check {
@@ -146,6 +158,16 @@ ul li a:hover {
 .check-input {
   margin-right: 10px;
   cursor: pointer;
+}
+
+.dropdown-item {
+  padding: 10px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.dropdown-item:hover {
+  background: #f4f4f4;
 }
 
 /* login & register */
