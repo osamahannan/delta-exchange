@@ -99,7 +99,7 @@ ul li a:hover {
 }
 
 .dropdown {
-  width: 200px;
+  width: 250px;
   margin: 40px;
   position: relative;
 }
@@ -142,12 +142,13 @@ ul li a:hover {
   background: #fff;
   box-shadow: 3px 3px 10px 6px rgba(0, 0, 0, 0.06);
   font-weight: 500;
-  font-size: 17px;
+  font-size: 20px;
   color: #333;
+  min-width: 219px;
 }
 
 .status-content {
-  width: 119px;
+  min-width: 119px;
 }
 
 .form-check {
@@ -168,6 +169,44 @@ ul li a:hover {
 
 .dropdown-item:hover {
   background: #f4f4f4;
+}
+
+.heading-tags {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+}
+
+.heading-tags.Active {
+  background: #f4f4f4;
+}
+
+.heading-tags h3,
+.heading-tags span,
+.deletebtn {
+  width: 300px;
+}
+
+.deletebtn {
+  display: flex;
+  justify-content: space-between;
+}
+
+.deletebtn img {
+  height: 17px;
+  margin-right: 20px;
+  cursor: pointer;
+}
+
+.label {
+  display: flex;
+  align-items: center;
+  width: 250px;
+  margin-left: 40px;
+}
+
+.label input {
+  margin-right: 30px;
 }
 
 /* login & register */
