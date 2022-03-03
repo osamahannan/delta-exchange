@@ -3,7 +3,7 @@ import arrowdown from "../assets/arrow-down.png";
 import arrowup from "../assets/arrow-up.png";
 import { useSelector } from 'react-redux';
 
-const Dropdown = ({ status, setStatus }) => {
+const Dropdown = ({ status, setStatus, handleFilter }) => {
     // const userData = [{ name: "DC United" }, { name: "Manchester United" }, { name: "LA Galaxy" }]
     const CompanyData = useSelector((state) => state.authReducer.userRecords)
     const isLoading = useSelector((state) => state.authReducer.isLoading)
@@ -33,8 +33,7 @@ const Dropdown = ({ status, setStatus }) => {
 
     // const onFilterSelect = () => {
     //     console.log(status)
-    //     filterCompanyData(status)
-
+    //     filterHandle(status)
     // }
 
     return (
@@ -75,15 +74,15 @@ const Dropdown = ({ status, setStatus }) => {
                 </div>
 
                 <div className='dropdown status'>
-                    <div className="dropdown-btn" onClick={() => setShowStatus(!showStatus)}>
+                    <div className="dropdown-btn" onClick={() => setShowStatus(!showStatus)} >
                         {status}
                         {showStatus ? <img src={arrowup} alt="arrowup" className='arrowup' /> : <img src={arrowdown} alt="dropdown" className='arrowdown' />}
                     </div>
                     {showStatus ?
                         <div className="dropdown-content status-content">
-                            <div className="dropdown-item" onClick={e => { setStatus(e.target.textContent); setShowStatus(!showStatus) }}>All </div>
-                            <div className="dropdown-item" onClick={e => { setStatus(e.target.textContent); setShowStatus(!showStatus) }}>Active </div>
-                            <div className="dropdown-item" onClick={e => { setStatus(e.target.textContent); setShowStatus(!showStatus) }}>Closed </div>
+                            <div className="dropdown-item" onClick={e => { setStatus(e.target.textContent); setShowStatus(!showStatus); handleFilter("All") }}>All </div>
+                            <div className="dropdown-item" onClick={e => { setStatus(e.target.textContent); setShowStatus(!showStatus); handleFilter("Active") }}>Active </div>
+                            <div className="dropdown-item" onClick={e => { setStatus(e.target.textContent); setShowStatus(!showStatus); handleFilter("Closed") }}>Closed </div>
                         </div> : ""
                     }
                 </div>

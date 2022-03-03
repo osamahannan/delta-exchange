@@ -215,7 +215,9 @@ ul li a:hover {
 .modalBackground {
   width: 100vw;
   height: 100vh;
-  background-color: rgba(200, 200, 200);
+  background-color: rgb(0, 0, 0, 0.5);
+  top: 0;
+  left: 0;
   position: fixed;
   display: flex;
 }
@@ -230,7 +232,7 @@ ul li a:hover {
   flex-direction: column;
   padding: 20px;
   position: relative;
-  top: 15%;
+  top: 20%;
   left: 28%;
 }
 

@@ -5,6 +5,8 @@ import Modal from './Modal';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteUser, getUser } from '../store/Actions/auth.action';
 import Loader from './Loader';
+import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
 
@@ -14,6 +16,8 @@ const Home = () => {
     const [companies, setCompanies] = useState(CompanyData);
     const isLoading = useSelector((state) => state.authReducer.isLoading)
     const [status, setStatus] = useState("Status");
+    const userToken = Cookies.get("usertoken");
+    const navigate = useNavigate();
 
     const deleteHandler = (objectId) => {
         dispatch(deleteUser(objectId));
@@ -24,24 +28,21 @@ const Home = () => {
     }, [])
 
     useEffect(() => {
-        console.log("companies==", companies)
-        console.log("CompanyData==", CompanyData)
-        const filterHandle = (status) => {
-            console.log(status);
-            switch (status) {
-                case "Active":
-                    setCompanies(CompanyData.filter(item => item.status === "Active"))
-                    break;
-                case "Closed":
-                    setCompanies(CompanyData.filter(item => item.status === "Closed"))
-                    break;
-                default:
-                    setCompanies(CompanyData);
-                    break;
-            }
+        setCompanies(CompanyData)
+        console.log(userToken);
+        if (!userToken) {
+            navigate("/login");
         }
-        filterHandle(status);
-    }, [CompanyData, status])
+    }, [CompanyData])
+
+
+
+    const handleFilter = (data) => {
+        let temp = data === "All" ? CompanyData : CompanyData.filter(x => x.status === data);
+        setCompanies(temp)
+    }
+
+
 
     return (
         isLoading ? <Loader /> :
@@ -50,7 +51,7 @@ const Home = () => {
                     <h1>Team Members</h1>
                     <button className='btn add' onClick={() => setOpenModal(!openModal)}>Add Members +</button>
                 </div>
-                <Dropdown status={status} setStatus={setStatus} />
+                <Dropdown status={status} setStatus={setStatus} handleFilter={handleFilter} />
                 <div className="heading-tags">
                     <div className="label">
                         <input type="checkbox" />

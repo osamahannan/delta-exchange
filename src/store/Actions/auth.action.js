@@ -14,6 +14,7 @@ export const tryLogin = (data) => {
             })
             Cookies.set("usertoken", res.data["user-token"])
             dispatch({ type: LOGIN_SUCCESS, payload: res.data });
+            window.open('/', "_self")
         } catch (err) {
             dispatch({ type: LOGIN_FAILED, payload: err })
         }

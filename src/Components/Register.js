@@ -24,15 +24,12 @@ const Signup = () => {
 
     const dispatch = useDispatch();
 
-    // const history = useHistory();
-
     const [user, setUser] = useState({
         email: "", password: ""
     });
 
     let name, value;
     const handleInputs = (e) => {
-        // console.log(e);
         name = e.target.name;
         value = e.target.value;
         setUser({ ...user, [name]: value })
