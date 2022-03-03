@@ -1,4 +1,4 @@
-import { LOGIN_START, LOGIN_SUCCESS, LOGIN_FAILED, REGISTER_START, REGISTER_SUCCESS, REGISTER_FAILED } from "../../Constants/actionType"
+import { LOGIN_START, LOGIN_SUCCESS, LOGIN_FAILED, REGISTER_START, REGISTER_SUCCESS, REGISTER_FAILED, FETCH_USER_DATA_START, FETCH_USER_DATA_SUCCESS, FETCH_USER_DATA_FAILED, CREATE_USER_START, CREATE_USER_SUCCESS, CREATE_USER_FAILED, DELETE_USER_START, DELETE_USER_SUCCESS, DELETE_USER_FAILED } from "../../Constants/actionType"
 import axios from "axios";
 import { baseURL } from "../../Constants/apiconfig";
 import { authHeader } from "../../Constants/authHeader";
@@ -32,6 +32,47 @@ export const userRegister = (data) => {
 
         } catch (err) {
             dispatch({ type: REGISTER_FAILED, payload: err })
+        }
+    }
+}
+export const createUser = (data) => {
+    return async (dispatch) => {
+        dispatch({ type: CREATE_USER_START });
+        try {
+            const res = await axios.post(`${baseURL}/api/data/companyData`, data, {
+                headers: authHeader(),
+            })
+            dispatch({ type: CREATE_USER_START, payload: res.data });
+            dispatch(getUser())
+        } catch (err) {
+            dispatch({ type: CREATE_USER_FAILED, payload: err })
+        }
+    }
+}
+export const getUser = () => {
+    return async (dispatch) => {
+        dispatch({ type: FETCH_USER_DATA_START });
+        try {
+            const res = await axios.get(`${baseURL}/api/data/companyData`, {
+                headers: authHeader(),
+            })
+            dispatch({ type: FETCH_USER_DATA_SUCCESS, payload: res.data });
+        } catch (err) {
+            dispatch({ type: FETCH_USER_DATA_FAILED, payload: err })
+        }
+    }
+}
+export const deleteUser = (objectId) => {
+    return async (dispatch) => {
+        dispatch({ type: DELETE_USER_START });
+        try {
+            const res = await axios.delete(`${baseURL}/api/data/companyData/${objectId}`, {
+                headers: authHeader(),
+            })
+            dispatch({ type: DELETE_USER_SUCCESS, payload: objectId });
+            dispatch(getUser())
+        } catch (err) {
+            dispatch({ type: DELETE_USER_FAILED, payload: err })
         }
     }
 }

@@ -1,20 +1,20 @@
 export const CompanyData = [
     {
         name: "Wayne Rooney",
-        Company: "DC United",
-        Status: "Active",
-        Notes: "ManUtd Highest Scorer"
+        company: "DC United",
+        status: "Active",
+        notes: "ManUtd Highest Scorer"
     },
     {
         name: "Ryan Giggs",
-        Company: "Manchester United",
-        Status: "Closed",
-        Notes: "Most matches played"
+        company: "Manchester United",
+        status: "Closed",
+        notes: "Most matches played"
     },
     {
         name: "Zlatan Ibrahimovic",
-        Company: "LA Galaxy",
-        Status: "Active",
-        Notes: "I am Zlatan"
+        company: "LA Galaxy",
+        status: "Active",
+        notes: "I am Zlatan"
     },
 ]

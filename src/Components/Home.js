@@ -1,43 +1,85 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Dropdown from './Dropdown'
-import { CompanyData } from './CompanyData'
 import deletebtn from "../assets/delete.png";
+import Modal from './Modal';
+import { useDispatch, useSelector } from 'react-redux';
+import { deleteUser, getUser } from '../store/Actions/auth.action';
+import Loader from './Loader';
 
 const Home = () => {
 
+    const dispatch = useDispatch();
+    const [openModal, setOpenModal] = useState(false)
+    const CompanyData = useSelector((state) => state.authReducer.userRecords)
+    const [companies, setCompanies] = useState(CompanyData);
+    const isLoading = useSelector((state) => state.authReducer.isLoading)
+    const [status, setStatus] = useState("Status");
+
+    const deleteHandler = (objectId) => {
+        dispatch(deleteUser(objectId));
+    }
+
+    useEffect(() => {
+        dispatch(getUser())
+    }, [])
+
+    useEffect(() => {
+        console.log("companies==", companies)
+        console.log("CompanyData==", CompanyData)
+        const filterHandle = (status) => {
+            console.log(status);
+            switch (status) {
+                case "Active":
+                    setCompanies(CompanyData.filter(item => item.status === "Active"))
+                    break;
+                case "Closed":
+                    setCompanies(CompanyData.filter(item => item.status === "Closed"))
+                    break;
+                default:
+                    setCompanies(CompanyData);
+                    break;
+            }
+        }
+        filterHandle(status);
+    }, [CompanyData, status])
+
     return (
-        <div className='home'>
-            <div className="heading">
-                <h1>Team Members</h1>
-                <button className='btn add'>Add Members +</button>
-            </div>
-            <Dropdown />
-            <div className="heading-tags">
-                <div className="label">
-                    <input type="checkbox" />
-                    <h3>Name</h3>
+        isLoading ? <Loader /> :
+            <div className='home'>
+                <div className="heading">
+                    <h1>Team Members</h1>
+                    <button className='btn add' onClick={() => setOpenModal(!openModal)}>Add Members +</button>
                 </div>
-                <h3>Company</h3>
-                <h3>Status</h3>
-                <h3>Last Updated</h3>
-                <h3>Notes</h3>
-            </div>
-            {CompanyData.map((data) => (
-                <div className={`heading-tags ${data.Status}`}>
+                <Dropdown status={status} setStatus={setStatus} />
+                <div className="heading-tags">
                     <div className="label">
                         <input type="checkbox" />
-                        <div>{data.name}</div>
+                        <h3>Name</h3>
                     </div>
-                    <span>{data.Company}</span>
-                    <span>{data.Status}</span>
-                    <span>Last Updated</span>
-                    <span className='deletebtn'>
-                        {data.Notes}
-                        <img src={deletebtn} alt="delete" />
-                    </span>
+                    <h3>Company</h3>
+                    <h3>Status</h3>
+                    <h3>Last Updated</h3>
+                    <h3>Notes</h3>
                 </div>
-            ))}
-        </div>
+                {companies?.map((data) => (
+                    <div className={`heading-tags ${data.status}`} key={data.objectId}>
+                        <div className="label">
+                            <input type="checkbox" />
+                            <div>{data.name}</div>
+                        </div>
+                        <span>{data.company}</span>
+                        <span>{data.status}</span>
+                        <span>{JSON.stringify(data.date).slice(1, 11)}</span>
+                        <span className='deletebtn'>
+                            {data.notes}
+                            <img src={deletebtn} alt="delete" onClick={() => deleteHandler(data.objectId)} />
+                        </span>
+                    </div>
+                ))}
+
+                {openModal && <Modal openModal={openModal} setOpenModal={setOpenModal} CompanyData={CompanyData} />}
+
+            </div>
     )
 }
 
