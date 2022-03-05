@@ -50,7 +50,7 @@ const Modal = ({ openModal, setOpenModal }) => {
                 </div>
                 <div className="buttonSector">
                     <button onClick={() => setOpenModal(!openModal)} className="cancelbtn">Cancel</button>
-                    <button className='btn savebt' onClick={handleSubmit}>Save</button>
+                    <button className='btn savebtn' onClick={handleSubmit}>Save</button>
                 </div>
             </form>
         </div>
