@@ -4,7 +4,6 @@ import arrowup from "../assets/arrow-up.png";
 import { useSelector } from 'react-redux';
 
 const Dropdown = ({ status, setStatus, handleFilter }) => {
-    // const userData = [{ name: "DC United" }, { name: "Manchester United" }, { name: "LA Galaxy" }]
     const CompanyData = useSelector((state) => state.authReducer.userRecords)
     const isLoading = useSelector((state) => state.authReducer.isLoading)
     const [company, setCompany] = useState(CompanyData);

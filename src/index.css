@@ -385,7 +385,7 @@ ul li a:hover {
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  background: #e7bb38;
+  background: rgb(44 44 84);
   animation: lds-grid 1.2s linear infinite;
 }
 .lds-grid div:nth-child(1) {

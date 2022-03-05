@@ -17,6 +17,7 @@ const Navbar = () => {
 
     const removeToken = () => {
         Cookies.remove("usertoken");
+        alert("You have successfully logged out!")
         setCheckAuth(null);
     }
     return (

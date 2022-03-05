@@ -10,13 +10,13 @@ const Signup = () => {
     const [userToken, setuserToken] = useState(Cookies.get("usertoken"));
     const navigate = useNavigate();
     const tempUserToken = Cookies.get("usertoken")
-    console.log("tempUserToken====", tempUserToken)
+    // console.log("tempUserToken====", tempUserToken)
 
 
     useEffect(() => {
         setuserToken(Cookies.get("usertoken"));
         const tempUserToken = Cookies.get("usertoken")
-        console.log("tempUserToken====", tempUserToken)
+        // console.log("tempUserToken====", tempUserToken)
         if (tempUserToken) {
             navigate("/");
         }
@@ -37,6 +37,10 @@ const Signup = () => {
 
     const handleRegister = () => {
         dispatch(userRegister(user));
+        // if (payload === err) {
+        //     alert("Incorrect email");
+        // }
+        // else alert("Registration Successful");
     }
 
     return (

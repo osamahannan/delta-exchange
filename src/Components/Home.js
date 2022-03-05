@@ -13,6 +13,8 @@ const Home = () => {
     const dispatch = useDispatch();
     const [openModal, setOpenModal] = useState(false)
     const CompanyData = useSelector((state) => state.authReducer.userRecords)
+    console.log(useSelector((state) => state));
+
     const [companies, setCompanies] = useState(CompanyData);
     const isLoading = useSelector((state) => state.authReducer.isLoading)
     const [status, setStatus] = useState("Status");
@@ -29,7 +31,7 @@ const Home = () => {
 
     useEffect(() => {
         setCompanies(CompanyData)
-        console.log(userToken);
+        // console.log(userToken);
         if (!userToken) {
             navigate("/login");
         }

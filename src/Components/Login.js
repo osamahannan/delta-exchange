@@ -4,17 +4,20 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { tryLogin } from '../store/Actions/auth.action';
 import Cookies from 'js-cookie';
+import { useSelector } from 'react-redux';
 
 const Login = () => {
     const userToken = Cookies.get("usertoken")
     const navigate = useNavigate();
+    const error = useSelector((state) => state.authReducer.error);
+    console.log(error);
 
     useEffect(() => {
-        console.log(userToken);
+        // console.log(userToken);
         if (userToken) {
             navigate("/");
         }
-    }, [userToken])
+    }, [userToken, error])
 
 
     const dispatch = useDispatch();
@@ -24,6 +27,9 @@ const Login = () => {
 
     const handleLogin = () => {
         dispatch(tryLogin({ login: email, password }))
+        if (error)
+            alert("Invalid login or password");
+        else alert("Login Successful");
     }
 
 

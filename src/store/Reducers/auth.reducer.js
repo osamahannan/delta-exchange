@@ -19,6 +19,7 @@ export default (state = initialState, action) => {
         case LOGIN_FAILED:
             return {
                 isLoading: false,
+                error: action.payload
             }
         case FETCH_USER_DATA_START:
             return {
