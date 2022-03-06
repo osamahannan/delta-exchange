@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link } from "react-router-dom";
 import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const Navbar = () => {
 
@@ -17,7 +18,9 @@ const Navbar = () => {
 
     const removeToken = () => {
         Cookies.remove("usertoken");
-        alert("You have successfully logged out!")
+        toast.success("You have successfully logged out!", {
+            autoClose: 1500
+        })
         setCheckAuth(null);
     }
     return (

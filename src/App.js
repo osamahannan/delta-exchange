@@ -4,6 +4,8 @@ import Navbar from "./Components/Navbar";
 import Register from "./Components/Register";
 import Login from "./Components/Login";
 import Home from "./Components/Home";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
 
@@ -13,9 +15,9 @@ function App() {
   return (
     <div className="App">
 
-      <Router>
+      <ToastContainer />
 
-        {/* <ScrollToTop /> */}
+      <Router>
 
         <Navbar />
 
@@ -28,8 +30,6 @@ function App() {
           <Route exact path="/register" element={<Register />} />
 
         </Routes>
-
-        {/* <ScrollButton /> */}
 
       </Router>
 

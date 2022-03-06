@@ -3,6 +3,7 @@ import axios from "axios";
 import { baseURL } from "../../Constants/apiconfig";
 import { authHeader } from "../../Constants/authHeader";
 import Cookies from 'js-cookie'
+import { toast } from 'react-toastify';
 
 
 export const tryLogin = (data) => {
@@ -14,9 +15,15 @@ export const tryLogin = (data) => {
             })
             Cookies.set("usertoken", res.data["user-token"])
             dispatch({ type: LOGIN_SUCCESS, payload: res.data });
-            window.open('/', "_self")
+            setTimeout(() => {
+                window.open('/', "_self")
+            }, 2000);
+            toast.success("You are successfully logged in", {
+                autoClose: 1000
+            });
         } catch (err) {
             dispatch({ type: LOGIN_FAILED, payload: err })
+            toast.error("Incorrect Username or Passward");
         }
     }
 }
@@ -30,8 +37,10 @@ export const userRegister = (data) => {
             })
             dispatch({ type: REGISTER_SUCCESS, payload: res.data });
             dispatch(tryLogin({ login: data.email, password: data.password }))
+            toast.success("User Registerd successfully");
 
         } catch (err) {
+            toast.error("Invalid Username or password");
             dispatch({ type: REGISTER_FAILED, payload: err })
         }
     }
@@ -44,6 +53,9 @@ export const createUser = (data) => {
                 headers: authHeader(),
             })
             dispatch({ type: CREATE_USER_START, payload: res.data });
+            toast.success("Record added successfully", {
+                autoClose: 1500
+            });
             dispatch(getUser())
         } catch (err) {
             dispatch({ type: CREATE_USER_FAILED, payload: err })
@@ -71,6 +83,9 @@ export const deleteUser = (objectId) => {
                 headers: authHeader(),
             })
             dispatch({ type: DELETE_USER_SUCCESS, payload: objectId });
+            toast.success("Record deleted successfully", {
+                autoClose: 1500
+            });
             dispatch(getUser())
         } catch (err) {
             dispatch({ type: DELETE_USER_FAILED, payload: err })
